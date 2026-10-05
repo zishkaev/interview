@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 7c287eb4d186d2641a53422907c224b3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1760716456978332216
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_0
+  - first:
+      213: 8269595039311670553
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_1
+  - first:
+      213: 7240088432295385061
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_2
+  - first:
+      213: -4670712285977934881
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_3
+  - first:
+      213: 3844051933043932810
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_4
+  - first:
+      213: 7857857309529534338
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_5
+  - first:
+      213: -7049563933871625107
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_6
+  - first:
+      213: 5995188411428001853
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_7
+  - first:
+      213: 5921644027563735075
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_8
+  - first:
+      213: -6178465660632940755
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_9
+  - first:
+      213: 5381099484910094533
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_10
+  - first:
+      213: 6249244334026641374
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_11
+  - first:
+      213: -8069913628916158313
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_12
+  - first:
+      213: 3550712552643892764
+    second: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_0
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 683
+        width: 221
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c54f9706bda097e0800000000000000
+      internalID: -1760716456978332216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_1
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 683
+        width: 247
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91d2182cfd083c270800000000000000
+      internalID: 8269595039311670553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_2
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 683
+        width: 248
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e7916dc116f97460800000000000000
+      internalID: 7240088432295385061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_3
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 683
+        width: 222
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd38b322ceb4e2fb0800000000000000
+      internalID: -4670712285977934881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_4
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 563
+        width: 169
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8ebc3fcdd0d85530800000000000000
+      internalID: 3844051933043932810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_5
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 563
+        width: 316
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28fe63e1797bc0d60800000000000000
+      internalID: 7857857309529534338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_6
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 563
+        width: 316
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6c2d2cc3faea2e90800000000000000
+      internalID: -7049563933871625107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_7
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 562
+        width: 169
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3854b8a810333350800000000000000
+      internalID: 5995188411428001853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_8
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 442
+        width: 506
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 328ff3d6ed7ed2250800000000000000
+      internalID: 5921644027563735075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_9
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 442
+        width: 506
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2f3601773ea14aa0800000000000000
+      internalID: -6178465660632940755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_10
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 264
+        width: 505
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c88a13a8718daa40800000000000000
+      internalID: 5381099484910094533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_11
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 263
+        width: 506
+        height: 155
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edfc744ac96c9b650800000000000000
+      internalID: 6249244334026641374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_12
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 36
+        width: 506
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7907e5c8f48e10090800000000000000
+      internalID: -8069913628916158313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_13
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 36
+        width: 506
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 21, y: 21, z: 36, w: 21}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c161cdf014aa64130800000000000000
+      internalID: 3550712552643892764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: de32413eea4a8614981fadb98084eb19
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_0: -1760716456978332216
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_1: 8269595039311670553
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_10: 5381099484910094533
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_11: 6249244334026641374
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_12: -8069913628916158313
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_13: 3550712552643892764
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_2: 7240088432295385061
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_3: -4670712285977934881
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_4: 3844051933043932810
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_5: 7857857309529534338
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_6: -7049563933871625107
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_7: 5995188411428001853
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_8: 5921644027563735075
+      Different Shape Message Bubbles Blue and Grey-no-bg-preview (carve.photos)_9: -6178465660632940755
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
