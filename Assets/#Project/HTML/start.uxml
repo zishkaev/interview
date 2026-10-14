@@ -1,0 +1,411 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/%23Project/HTML/start_style.uss?fileID=7433441132597879392&amp;guid=55a88370673fa3c45997f147954892ae&amp;type=3#start_style"/>
+    <ui:VisualElement name="body" class="html-tag-body">
+        <ui:VisualElement name="header" class="header">
+            <ui:VisualElement name="header-inner" class="header-inner">
+                <ui:Label name="logo" text="ФУ Финуниверситет Симулятор собеседований" class="logo"/>
+                <ui:VisualElement name="header-nav" class="header-nav">
+                    <ui:Label text="Главная" class="html-tag-a"/>
+                    <ui:Label text="О сервисе" class="html-tag-a"/>
+                    <ui:Label text="Партнёрам" class="html-tag-a"/>
+                    <ui:Label text="Контакты" class="html-tag-a"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="progressBar" class="progress-bar" style="display: none;">
+            <ui:VisualElement class="progress-inner">
+                <ui:Label name="progressLabel" text="Шаг 1 из 6" class="progress-label"/>
+                <ui:VisualElement name="progressSteps" class="progress-steps" style="flex-direction: row; flex-basis: 0; flex-grow: 1; margin-left: 16px;">
+                    <ui:VisualElement class="progress-step" style="flex-grow: 1; flex-basis: 0; margin-right: 6px;"/>
+                    <ui:VisualElement class="progress-step" style="flex-grow: 1; flex-basis: 0; margin-right: 6px;"/>
+                    <ui:VisualElement class="progress-step" style="flex-grow: 1; flex-basis: 0; margin-right: 6px;"/>
+                    <ui:VisualElement class="progress-step" style="flex-grow: 1; flex-basis: 0; margin-right: 6px;"/>
+                    <ui:VisualElement class="progress-step" style="flex-grow: 1; flex-basis: 0; margin-right: 6px;"/>
+                    <ui:VisualElement class="progress-step" style="flex-grow: 1; flex-basis: 0;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="main" class="main">
+            <ui:VisualElement name="screen-0" class="screen active">
+                <ui:VisualElement class="welcome-hero">
+                    <ui:VisualElement class="welcome-text">
+                        <ui:Label text="Симулятор собеседований" class="html-tag-h1"/>
+                        <ui:Label text="Подготовьтесь к реальному интервью с ведущими компаниями-партнёрами Финуниверситета в безопасной среде" class="subtitle"/>
+                        <ui:Button name="btn-start" text="Начать симуляцию →" class="btn btn-primary btn-lg"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="welcome-visual">
+                        <ui:Label text="🐱" class="mascot"/>
+                        <ui:Label text="«Мы не следуем привычным трендам, мы создаём новые»" class="quote"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="features">
+                    <ui:VisualElement class="feature-card">
+                        <ui:Label text="🎯" class="feature-icon"/>
+                        <ui:Label text="Реалистичные сценарии" class="html-tag-h3"/>
+                        <ui:Label text="Диалоги с виртуальным рекрутером, максимально приближенные к реальным собеседованиям" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="feature-card">
+                        <ui:Label text="🤝" class="feature-icon"/>
+                        <ui:Label text="Компании-партнёры" class="html-tag-h3"/>
+                        <ui:Label text="Сбер, ВТБ, Яндекс и другие ведущие работодатели. Выбирайте вакансию под свои интересы" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="feature-card">
+                        <ui:Label text="📈" class="feature-icon"/>
+                        <ui:Label text="Персональный отчёт" class="html-tag-h3"/>
+                        <ui:Label text="Автоматическая оценка ответов и рекомендации по развитию карьерных навыков" class="html-tag-p"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="screen-1" class="screen">
+                <ui:Label text="Главная / Выбор уровня образования" class="breadcrumbs"/>
+                <ui:Label text="Выберите уровень образования" class="html-tag-h1"/>
+                <ui:Label text="Этот шаг необходим, чтобы система сразу адаптировала список доступных факультетов и уровень сложности вопросов под конкретную аудиторию." class="html-tag-p"/>
+                <ui:VisualElement class="selection-grid">
+                    <ui:VisualElement name="level-college" class="selection-card">
+                        <ui:Label text="🎓" class="card-icon"/>
+                        <ui:Label text="Колледж" class="html-tag-h3"/>
+                        <ui:Label text="Среднее профессиональное образование. Вопросы базового уровня, ориентированные на начинающих специалистов." class="html-tag-p"/>
+                        <ui:Label text="1–2 курс" class="card-tag"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="level-university" class="selection-card">
+                        <ui:Label text="🏛" class="card-icon"/>
+                        <ui:Label text="ВУЗ" class="html-tag-h3"/>
+                        <ui:Label text="Высшее образование. Расширенный список факультетов и вопросы повышенной сложности для студентов и выпускников." class="html-tag-p"/>
+                        <ui:Label text="3–4 курс / магистратура" class="card-tag"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement style="margin-top: 48px; flex-direction: row;">
+                    <ui:Button name="btn-level-back" text="← Назад" class="btn btn-secondary"/>
+                    <ui:Button name="btn-level-next" text="Продолжить →" class="btn btn-primary" style="margin-left: 12px;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="screen-2" class="screen">
+                <ui:Label text="Главная / Уровень образования / Выбор факультета" class="breadcrumbs"/>
+                <ui:Label text="Выберите факультет" class="html-tag-h1"/>
+                <ui:Label text="После выбора уровня образования пользователь видит перечень факультетов Финуниверситета, соответствующих его профилю." class="html-tag-p"/>
+                <ui:VisualElement name="faculty-grid" class="selection-grid">
+                    <ui:VisualElement name="fac-fin" class="selection-card">
+                        <ui:Label text="💰" class="card-icon"/>
+                        <ui:Label text="Финансовый факультет" class="html-tag-h3"/>
+                        <ui:Label text="Банковское дело, финансы, инвестиции, корпоративные финансы" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="fac-tax" class="selection-card">
+                        <ui:Label text="📊" class="card-icon"/>
+                        <ui:Label text="Факультет налогов, аудита и бизнес-анализа" class="html-tag-h3"/>
+                        <ui:Label text="Налогообложение, аудит, бизнес-аналитика" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="fac-eco" class="selection-card">
+                        <ui:Label text="📈" class="card-icon"/>
+                        <ui:Label text="Факультет экономики и бизнеса" class="html-tag-h3"/>
+                        <ui:Label text="Экономика, менеджмент, предпринимательство" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="fac-law" class="selection-card">
+                        <ui:Label text="⚖️" class="card-icon"/>
+                        <ui:Label text="Юридический факультет" class="html-tag-h3"/>
+                        <ui:Label text="Гражданское, корпоративное, финансовое право" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="fac-meo" class="selection-card">
+                        <ui:Label text="🌍" class="card-icon"/>
+                        <ui:Label text="Факультет МЭО" class="html-tag-h3"/>
+                        <ui:Label text="Международная экономика, внешнеэкономические связи" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="fac-hsmu" class="selection-card">
+                        <ui:Label text="🏢" class="card-icon"/>
+                        <ui:Label text="Высшая школа управления" class="html-tag-h3"/>
+                        <ui:Label text="Государственное и муниципальное управление" class="html-tag-p"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement style="margin-top: 48px; flex-direction: row;">
+                    <ui:Button name="btn-faculty-back" text="← Назад" class="btn btn-secondary"/>
+                    <ui:Button name="btn-faculty-next" text="Продолжить →" class="btn btn-primary" style="margin-left: 12px;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="screen-3" class="screen">
+                <ui:Label text="Главная / Уровень / Факультет / Выбор компании-партнёра" class="breadcrumbs"/>
+                <ui:Label text="Выберите компанию-партнёра" class="html-tag-h1"/>
+                <ui:Label text="Экран показывает список компаний-партнёров Финуниверситета, которые участвуют в программе симуляции." class="html-tag-p"/>
+                <ui:VisualElement class="selection-grid">
+                    <ui:VisualElement name="comp-sber" class="selection-card">
+                        <ui:Label text="🏦" class="card-icon"/>
+                        <ui:Label text="Сбер" class="html-tag-h3"/>
+                        <ui:Label text="Крупнейший банк России. Финансовые, аналитические и IT-вакансии" class="html-tag-p"/>
+                        <ui:Label text="Топ-партнёр" class="card-tag"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="comp-vtb" class="selection-card">
+                        <ui:Label text="🏛" class="card-icon"/>
+                        <ui:Label text="ВТБ" class="html-tag-h3"/>
+                        <ui:Label text="Универсальный банк. Корпоративные финансы, риск-менеджмент" class="html-tag-p"/>
+                        <ui:Label text="Топ-партнёр" class="card-tag"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="comp-rosneft" class="selection-card">
+                        <ui:Label text="🛢" class="card-icon"/>
+                        <ui:Label text="Роснефть" class="html-tag-h3"/>
+                        <ui:Label text="Крупнейшая нефтяная компания. Финансы, экономика, юриспруденция" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="comp-yandex" class="selection-card">
+                        <ui:Label text="🔍" class="card-icon"/>
+                        <ui:Label text="Яндекс" class="html-tag-h3"/>
+                        <ui:Label text="Технологическая компания. Финтех, аналитика, продуктовый менеджмент" class="html-tag-p"/>
+                        <ui:Label text="IT и финтех" class="card-tag"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="comp-rostech" class="selection-card">
+                        <ui:Label text="⚙️" class="card-icon"/>
+                        <ui:Label text="Ростех" class="html-tag-h3"/>
+                        <ui:Label text="Государственная корпорация. Финансы, управление, инженерная экономика" class="html-tag-p"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="comp-rzd" class="selection-card">
+                        <ui:Label text="🚂" class="card-icon"/>
+                        <ui:Label text="РЖД" class="html-tag-h3"/>
+                        <ui:Label text="Крупнейшая транспортная компания. Логистика, финансы, экономика транспорта" class="html-tag-p"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement style="margin-top: 48px; flex-direction: row;">
+                    <ui:Button name="btn-company-back" text="← Назад" class="btn btn-secondary"/>
+                    <ui:Button name="btn-company-next" text="Продолжить →" class="btn btn-primary" style="margin-left: 12px;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="screen-4" class="screen">
+                <ui:Label text="Главная / Уровень / Факультет / Компания / Выбор вакансии" class="breadcrumbs"/>
+                <ui:Label text="Выберите вакансию" class="html-tag-h1"/>
+                <ui:Label text="Для выбранной компании открывается список актуальных вакансий. Каждая вакансия сопровождается рекомендацией по обучению." class="html-tag-p"/>
+                <ui:VisualElement class="selection-grid">
+                    <ui:VisualElement class="vacancy-card">
+                        <ui:Label text="📊" class="vacancy-logo"/>
+                        <ui:VisualElement class="vacancy-info">
+                            <ui:Label text="Младший финансовый аналитик" class="html-tag-h3"/>
+                            <ui:Label text="Анализ финансовой отчётности, подготовка презентаций для руководства, работа с Excel и BI-системами" class="html-tag-p"/>
+                            <ui:VisualElement class="vacancy-meta">
+                                <ui:Label text="📍 Москва" class="html-tag-span"/>
+                                <ui:Label text="💼 Полная занятость" class="html-tag-span"/>
+                                <ui:Label text="🎓 От 3 курса" class="html-tag-span"/>
+                            </ui:VisualElement>
+                            <ui:Label text="✓ Рекомендована для студентов 3–4 курсов" class="rec-badge"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="vacancy-card">
+                        <ui:Label text="💳" class="vacancy-logo"/>
+                        <ui:VisualElement class="vacancy-info">
+                            <ui:Label text="Специалист по кредитному анализу" class="html-tag-h3"/>
+                            <ui:Label text="Оценка кредитоспособности заёмщиков, анализ рисков, подготовка кредитных заключений" class="html-tag-p"/>
+                            <ui:VisualElement class="vacancy-meta">
+                                <ui:Label text="📍 Москва" class="html-tag-span"/>
+                                <ui:Label text="💼 Полная занятость" class="html-tag-span"/>
+                                <ui:Label text="🎓 Выпускник" class="html-tag-span"/>
+                            </ui:VisualElement>
+                            <ui:Label text="✓ Подходит для выпускников магистратуры" class="rec-badge"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="vacancy-card">
+                        <ui:Label text="📈" class="vacancy-logo"/>
+                        <ui:VisualElement class="vacancy-info">
+                            <ui:Label text="Стажёр в отдел инвестиционного банкинга" class="html-tag-h3"/>
+                            <ui:Label text="Участие в сделках M&amp;A, финансовое моделирование, подготовка питч-буков" class="html-tag-p"/>
+                            <ui:VisualElement class="vacancy-meta">
+                                <ui:Label text="📍 Москва" class="html-tag-span"/>
+                                <ui:Label text="💼 Стажировка" class="html-tag-span"/>
+                                <ui:Label text="🎓 От 2 курса" class="html-tag-span"/>
+                            </ui:VisualElement>
+                            <ui:Label text="✓ Рекомендована для студентов 2–3 курсов" class="rec-badge"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="vacancy-card">
+                        <ui:Label text="🤝" class="vacancy-logo"/>
+                        <ui:VisualElement class="vacancy-info">
+                            <ui:Label text="Менеджер по работе с корпоративными клиентами" class="html-tag-h3"/>
+                            <ui:Label text="Ведение портфеля корпоративных клиентов, кросс-продажи, развитие отношений" class="html-tag-p"/>
+                            <ui:VisualElement class="vacancy-meta">
+                                <ui:Label text="📍 Москва / регионы" class="html-tag-span"/>
+                                <ui:Label text="💼 Полная занятость" class="html-tag-span"/>
+                                <ui:Label text="🎓 Выпускник" class="html-tag-span"/>
+                            </ui:VisualElement>
+                            <ui:Label text="✓ Подходит для выпускников бакалавриата и магистратуры" class="rec-badge"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement style="margin-top: 48px; flex-direction: row;">
+                    <ui:Button name="btn-vacancy-back" text="← Назад" class="btn btn-secondary"/>
+                    <ui:Button name="btn-vacancy-next" text="Начать собеседование →" class="btn btn-primary" style="margin-left: 12px;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="screen-5" class="screen">
+                <ui:Label text="Главная / Прохождение собеседования" class="breadcrumbs"/>
+                <ui:Label text="Собеседование с рекрутером" class="html-tag-h1"/>
+                <ui:Label text="На экране появляется виртуальный рекрутер. Начинается диалог, максимально приближенный к реальному собеседованию." class="html-tag-p"/>
+                <ui:VisualElement class="chat-container">
+                    <ui:VisualElement class="chat-header">
+                        <ui:Label text="👩‍💼" class="chat-avatar"/>
+                        <ui:VisualElement class="chat-header-info">
+                            <ui:Label name="recruiter-name" text="Анна Петрова" class="html-tag-h3"/>
+                            <ui:Label text="HR-менеджер · Сбер · Онлайн" class="html-tag-p"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:ScrollView name="chatMessages" mode="Vertical" class="chat-messages"/>
+                    <ui:VisualElement name="chatInput" class="chat-input"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="screen-6" class="screen">
+                <ui:VisualElement class="results-hero">
+                    <ui:Label text="Собеседование завершено!" class="html-tag-h1"/>
+                    <ui:Label text="Рекрутер благодарит вас за прохождение. Система автоматически оценила качество ваших ответов и сформировала итоговый отчёт." class="html-tag-p"/>
+                    <ui:VisualElement class="score-circle">
+                        <ui:Label name="totalScore" text="78" class="score-value"/>
+                        <ui:Label text="из 100" class="score-label"/>
+                    </ui:VisualElement>
+                    <ui:Label text="Хороший результат! Есть потенциал для роста." class="html-tag-p"/>
+                </ui:VisualElement>
+                <ui:Label text="Разбор по блокам" class="html-tag-h2"/>
+                <ui:VisualElement class="results-grid">
+                    <ui:VisualElement class="result-card">
+                        <ui:Label text="🎤 Самопрезентация" class="html-tag-h3"/>
+                        <ui:VisualElement class="html-tag-ul">
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Структура ответа"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 85%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Релевантность опыту"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 72%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Уверенность подачи"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 80%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="result-card">
+                        <ui:Label text="📚 Профессиональные знания" class="html-tag-h3"/>
+                        <ui:VisualElement class="html-tag-ul">
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Терминология"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 90%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Глубина понимания"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 68%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Примеры из практики"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 60%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="result-card">
+                        <ui:Label text="🧩 Ситуационные кейсы" class="html-tag-h3"/>
+                        <ui:VisualElement class="html-tag-ul">
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Логика решения"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 75%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Аргументация"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 70%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Креативность подхода"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 82%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="result-card">
+                        <ui:Label text="💼 Коммерческие задачи" class="html-tag-h3"/>
+                        <ui:VisualElement class="html-tag-ul">
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Понимание бизнеса"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 65%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Ориентация на результат"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 78%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="html-tag-li">
+                                <ui:Label text="Работа с данными"/>
+                                <ui:VisualElement class="score-bar">
+                                    <ui:VisualElement class="score-bar-fill" style="width: 72%;"/>
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label text="Рекомендации по развитию" class="html-tag-h2"/>
+                <ui:Label text="На основе ваших ответов система подобрала персональные рекомендации:" class="html-tag-p"/>
+                <ui:VisualElement class="recommendation-card">
+                    <ui:Label text="🎯 Курс «Твоя успешная карьера»" class="html-tag-h4"/>
+                    <ui:Label text="Для улучшения общего понимания рынка труда и навыков трудоустройства." class="html-tag-p"/>
+                    <ui:VisualElement style="flex-direction: row; flex-wrap: wrap; align-items: center;">
+                        <ui:Label text="Карьера" class="rec-tag"/>
+                        <ui:Label text="Рынок труда" class="rec-tag"/>
+                        <ui:Button text="Подробнее о курсе" class="btn btn-accent" style="margin-top: 12px;"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="recommendation-card">
+                    <ui:Label text="🎤 Курс «Самопрезентация»" class="html-tag-h4"/>
+                    <ui:Label text="Для отработки навыков эффективного представления себя и прохождения стресс-интервью." class="html-tag-p"/>
+                    <ui:VisualElement style="flex-direction: row; flex-wrap: wrap; align-items: center;">
+                        <ui:Label text="Soft skills" class="rec-tag"/>
+                        <ui:Label text="Самопрезентация" class="rec-tag"/>
+                        <ui:Button text="Подробнее о курсе" class="btn btn-accent" style="margin-top: 12px;"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement class="recommendation-card">
+                    <ui:Label text="🎓 Программы ДПО от центра карьеры" class="html-tag-h4"/>
+                    <ui:Label text="Платные программы дополнительного профессионального образования для углублённой профессиональной подготовки." class="html-tag-p"/>
+                    <ui:VisualElement style="flex-direction: row; flex-wrap: wrap; align-items: center;">
+                        <ui:Label text="ДПО" class="rec-tag"/>
+                        <ui:Label text="Профессиональный рост" class="rec-tag"/>
+                        <ui:Button text="Смотреть программы" class="btn btn-primary" style="margin-top: 12px;"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement style="margin-top: 48px; flex-direction: row; flex-wrap: wrap;">
+                    <ui:Button text="← На главную" class="btn btn-secondary" style="margin-right: 12px;"/>
+                    <ui:Button text="🔄 Пройти ещё раз" class="btn btn-primary" style="margin-right: 12px;"/>
+                    <ui:Button text="Скачать отчёт (PDF)" class="btn btn-accent"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="footer" class="footer">
+            <ui:VisualElement class="footer-inner">
+                <ui:VisualElement style="flex-grow: 1; flex-basis: 260px; margin: 20px;">
+                    <ui:Label text="Финансовый университет при Правительстве РФ" class="html-tag-h4"/>
+                    <ui:Label text="Ленинградский проспект, дом 49, Москва, 125167" class="html-tag-p"/>
+                    <ui:Label text="© 2026 Финуниверситет. Все права защищены." class="html-tag-p"/>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-basis: 200px; margin: 20px;">
+                    <ui:Label text="Сервис" class="html-tag-h4"/>
+                    <ui:Label text="О симуляторе" class="html-tag-p"/>
+                    <ui:Label text="Компаниям-партнёрам" class="html-tag-p"/>
+                    <ui:Label text="Преподавателям" class="html-tag-p"/>
+                    <ui:Label text="FAQ" class="html-tag-p"/>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-basis: 200px; margin: 20px;">
+                    <ui:Label text="Контакты" class="html-tag-h4"/>
+                    <ui:Label text="Центр карьеры" class="html-tag-p"/>
+                    <ui:Label text="support@fa.ru" class="html-tag-p"/>
+                    <ui:Label text="8 (495) 249-52-37" class="html-tag-p"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Label text="Мы не следуем привычным трендам, мы создаём новые" class="footer-bottom"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
