@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Симулятор собеседований — Финуниверситет</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Golos+Text:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-primary: #233E76;
+    --color-accent: #0198AF;
+    --color-secondary: #275E9F;
+    --color-bg-main: #FFFFFF;
+    --color-bg-secondary: #F3F3F3;
+    --color-bg-dark: #193D57;
+    --color-text-primary: #020202;
+    --color-text-secondary: #9197A3;
+    --font-main: 'Open Sans', sans-serif;
+    --font-alt: 'Golos Text', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-main);
+    background: var(--color-bg-main);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    background: var(--color-bg-main);
+    border-bottom: 1px solid #EAECEF;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-alt);
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 18px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .logo-text { line-height: 1.2; }
+  .logo-text small {
+    display: block;
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--color-text-secondary);
+  }
+  .header-nav { display: flex; gap: 24px; align-items: center; }
+  .header-nav a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .header-nav a:hover { color: var(--color-accent); }
+
+  .progress-bar { background: var(--color-bg-secondary); padding: 12px 0; }
+  .progress-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-steps { display: flex; gap: 8px; flex: 1; }
+  .progress-step {
+    flex: 1;
+    height: 6px;
+    background: #E0E4EC;
+    border-radius: 3px;
+    transition: background 0.3s;
+  }
+  .progress-step.active { background: var(--color-accent); }
+  .progress-step.done { background: var(--color-primary); }
+  .progress-label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .main {
+    flex: 1;
+    max-width: 1360px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 64px 32px 80px;
+  }
+
+  .screen { display: none; animation: fadeIn 0.4s ease; }
+  .screen.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .breadcrumbs {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 64px;
+  }
+  .breadcrumbs a { color: var(--color-accent); text-decoration: none; }
+  .breadcrumbs a:hover { text-decoration: underline; }
+
+  h1 {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 42px;
+    color: var(--color-primary);
+    margin-bottom: 56px;
+    line-height: 1.2;
+  }
+  h2 {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--color-primary);
+    margin-bottom: 32px;
+    margin-top: 80px;
+  }
+  p { font-size: 16px; margin-bottom: 24px; max-width: 720px; }
+
+  .welcome-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    margin-bottom: 80px;
+  }
+  .welcome-text h1 { margin-bottom: 32px; }
+  .welcome-text .subtitle {
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    margin-bottom: 40px;
+  }
+  .welcome-visual {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border-radius: 24px;
+    padding: 48px;
+    color: #fff;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .welcome-visual::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(1,152,175,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .mascot {
+    font-size: 120px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .welcome-visual .quote {
+    font-size: 20px;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+    line-height: 1.4;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 80px;
+  }
+  .feature-card {
+    background: var(--color-bg-secondary);
+    border-radius: 16px;
+    padding: 32px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(35,62,118,0.12);
+  }
+  .feature-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--color-accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .feature-card h3 {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+  }
+  .feature-card p { font-size: 14px; color: var(--color-text-secondary); margin: 0; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--color-primary); color: #fff; }
+  .btn-primary:hover {
+    background: var(--color-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(35,62,118,0.3);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+  .btn-secondary:hover { background: var(--color-primary); color: #fff; }
+  .btn-accent { background: var(--color-accent); color: #fff; }
+  .btn-accent:hover {
+    background: #017a8d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(1,152,175,0.3);
+  }
+  .btn-lg { padding: 20px 40px; font-size: 18px; }
+
+  .selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .selection-card {
+    background: var(--color-bg-main);
+    border: 2px solid #E0E4EC;
+    border-radius: 16px;
+    padding: 32px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .selection-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(1,152,175,0.15);
+  }
+  .selection-card.selected {
+    border-color: var(--color-primary);
+    background: #F5F7FC;
+  }
+  .selection-card.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .card-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  .selection-card h3 {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+  }
+  .selection-card p { font-size: 14px; color: var(--color-text-secondary); margin: 0; }
+  .card-tag {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+
+  .vacancy-card {
+    background: var(--color-bg-main);
+    border: 2px solid #E0E4EC;
+    border-radius: 16px;
+    padding: 28px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .vacancy-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 24px rgba(1,152,175,0.12);
+  }
+  .vacancy-card.selected {
+    border-color: var(--color-primary);
+    background: #F5F7FC;
+  }
+  .vacancy-logo {
+    width: 64px;
+    height: 64px;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .vacancy-info { flex: 1; }
+  .vacancy-info h3 {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+  }
+  .vacancy-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .vacancy-meta span {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .rec-badge {
+    background: #E8F4F8;
+    color: var(--color-accent);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 12px;
+    display: inline-block;
+  }
+
+  .chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--color-bg-main);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(35,62,118,0.08);
+    overflow: hidden;
+    border: 1px solid #E0E4EC;
+  }
+  .chat-header {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .chat-avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  .chat-header-info h3 {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+  .chat-header-info p { font-size: 12px; opacity: 0.8; margin: 0; }
+  .chat-messages {
+    padding: 28px;
+    min-height: 400px;
+    max-height: 500px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .message {
+    max-width: 85%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 15px;
+    line-height: 1.5;
+    animation: msgIn 0.3s ease;
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .message.bot {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .message.user {
+    background: var(--color-primary);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .message.system {
+    background: #FFF8E1;
+    color: #8D6E00;
+    align-self: center;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    max-width: 90%;
+  }
+  .chat-input {
+    padding: 20px 28px;
+    border-top: 1px solid #E0E4EC;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .chat-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .chat-option-btn {
+    background: var(--color-bg-main);
+    border: 2px solid #E0E4EC;
+    color: var(--color-text-primary);
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-family: var(--font-main);
+    line-height: 1.4;
+  }
+  .chat-option-btn:hover { 
+    border-color: var(--color-accent); 
+    background: #F0F9FA;
+    color: var(--color-primary);
+  }
+  .chat-option-btn:active {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .chat-block-label {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .results-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border-radius: 24px;
+    padding: 48px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .results-hero h1 { color: #fff; margin-bottom: 16px; }
+  .results-hero p { color: rgba(255,255,255,0.9); margin: 0 auto 32px; max-width: 600px; }
+  .score-circle {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 8px solid var(--color-accent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .score-value {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 1;
+  }
+  .score-label { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .result-card {
+    background: var(--color-bg-main);
+    border: 1px solid #E0E4EC;
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .result-card h3 {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .result-card h3 .icon {
+    width: 36px;
+    height: 36px;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .result-card ul { list-style: none; padding: 0; }
+  .result-card li {
+    padding: 10px 0;
+    border-bottom: 1px solid #F0F2F5;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .result-card li:last-child { border: none; }
+  .score-bar {
+    width: 100px;
+    height: 6px;
+    background: #E0E4EC;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: 3px;
+  }
+
+  .recommendation-card {
+    background: linear-gradient(135deg, #E8F4F8 0%, #F5F7FC 100%);
+    border: 2px solid var(--color-accent);
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 24px;
+  }
+  .recommendation-card h4 {
+    font-family: var(--font-alt);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+  }
+  .recommendation-card p { font-size: 14px; color: var(--color-text-primary); margin-bottom: 16px; }
+  .rec-tag {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .footer {
+    background: var(--color-bg-dark);
+    color: rgba(255,255,255,0.8);
+    padding: 40px 0 24px;
+    margin-top: auto;
+  }
+  .footer-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer h4 { color: #fff; font-family: var(--font-alt); font-size: 14px; margin-bottom: 16px; }
+  .footer p, .footer a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    line-height: 1.8;
+  }
+  .footer a:hover { color: var(--color-accent); }
+  .footer-bottom {
+    max-width: 1360px;
+    margin: 32px auto 0;
+    padding: 20px 32px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 12px;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+  }
+
+  @media (max-width: 960px) {
+    .welcome-hero { grid-template-columns: 1fr; gap: 32px; }
+    .features { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; margin-bottom: 40px; }
+    .main { padding: 40px 20px 60px; }
+    .header-inner { padding: 0 20px; }
+    .progress-inner { padding: 0 20px; }
+    .header-nav { display: none; }
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 26px; }
+    h2 { font-size: 22px; margin-top: 48px; }
+    .btn { padding: 14px 24px; font-size: 14px; }
+    .selection-grid { grid-template-columns: 1fr; }
+    .chat-messages { padding: 16px; }
+    .chat-header { padding: 16px; }
+    .chat-input { padding: 16px; }
+    .results-hero { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo" onclick="showScreen(0); return false;">
+      <div class="logo-mark">ФУ</div>
+      <div class="logo-text">
+        Финуниверситет
+        <small>Симулятор собеседований</small>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="#" onclick="showScreen(0); return false;">Главная</a>
+      <a href="#">О сервисе</a>
+      <a href="#">Партнёрам</a>
+      <a href="#">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<div class="progress-bar" id="progressBar" style="display:none;">
+  <div class="progress-inner">
+    <span class="progress-label" id="progressLabel">Шаг 1 из 6</span>
+    <div class="progress-steps" id="progressSteps">
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+      <div class="progress-step"></div>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <section class="screen active" id="screen-0">
+    <div class="welcome-hero">
+      <div class="welcome-text">
+        <h1>Симулятор собеседований</h1>
+        <p class="subtitle">Подготовьтесь к реальному интервью с ведущими компаниями-партнёрами Финуниверситета в безопасной среде</p>
+        <button class="btn btn-primary btn-lg" onclick="showScreen(1)">Начать симуляцию →</button>
+      </div>
+      <div class="welcome-visual">
+        <div class="mascot">🐱</div>
+        <div class="quote">«Мы не следуем привычным трендам, мы создаём новые»</div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Реалистичные сценарии</h3>
+        <p>Диалоги с виртуальным рекрутером, максимально приближенные к реальным собеседованиям</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Компании-партнёры</h3>
+        <p>Сбер, ВТБ, Яндекс и другие ведущие работодатели. Выбирайте вакансию под свои интересы</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"></div>
+        <h3>Персональный отчёт</h3>
+        <p>Автоматическая оценка ответов и рекомендации по развитию карьерных навыков</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-1">
+    <div class="breadcrumbs">
+      <a href="#" onclick="showScreen(0); return false;">Главная</a> / Выбор уровня образования
+    </div>
+    <h1>Выберите уровень образования</h1>
+    <p>Этот шаг необходим, чтобы система сразу адаптировала список доступных факультетов и уровень сложности вопросов под конкретную аудиторию.</p>
+
+    <div class="selection-grid">
+      <div class="selection-card" onclick="selectCard(this); setChoice('level','Колледж');">
+        <div class="card-icon">🎓</div>
+        <h3>Колледж</h3>
+        <p>Среднее профессиональное образование. Вопросы базового уровня, ориентированные на начинающих специалистов.</p>
+        <span class="card-tag">1–2 курс</span>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('level','ВУЗ');">
+        <div class="card-icon">️</div>
+        <h3>ВУЗ</h3>
+        <p>Высшее образование. Расширенный список факультетов и вопросы повышенной сложности для студентов и выпускников.</p>
+        <span class="card-tag">3–4 курс / магистратура</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; display: flex; gap: 16px;">
+      <button class="btn btn-secondary" onclick="showScreen(0)">← Назад</button>
+      <button class="btn btn-primary" id="btn-level-next" onclick="showScreen(2)" disabled>Продолжить →</button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-2">
+    <div class="breadcrumbs">
+      <a href="#" onclick="showScreen(0); return false;">Главная</a> / 
+      <a href="#" onclick="showScreen(1); return false;">Уровень образования</a> / 
+      Выбор факультета
+    </div>
+    <h1>Выберите факультет</h1>
+    <p>После выбора уровня образования пользователь видит перечень факультетов Финуниверситета, соответствующих его профилю. Он выбирает свой факультет, чтобы система могла предложить релевантные вакансии и профессиональные вопросы.</p>
+
+    <div class="selection-grid" id="faculty-grid">
+      <div class="selection-card" onclick="selectCard(this); setChoice('faculty','Финансовый факультет');">
+        <div class="card-icon">💰</div>
+        <h3>Финансовый факультет</h3>
+        <p>Банковское дело, финансы, инвестиции, корпоративные финансы</p>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('faculty','Факультет налогов, аудита и бизнес-анализа');">
+        <div class="card-icon">📊</div>
+        <h3>Факультет налогов, аудита и бизнес-анализа</h3>
+        <p>Налогообложение, аудит, бизнес-аналитика</p>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('faculty','Факультет экономики и бизнеса');">
+        <div class="card-icon">📈</div>
+        <h3>Факультет экономики и бизнеса</h3>
+        <p>Экономика, менеджмент, предпринимательство</p>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('faculty','Юридический факультет');">
+        <div class="card-icon">⚖️</div>
+        <h3>Юридический факультет</h3>
+        <p>Гражданское, корпоративное, финансовое право</p>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('faculty','Факультет международных экономических отношений');">
+        <div class="card-icon">🌍</div>
+        <h3>Факультет МЭО</h3>
+        <p>Международная экономика, внешнеэкономические связи</p>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('faculty','Факультет «Высшая школа управления»');">
+        <div class="card-icon">🏢</div>
+        <h3>Высшая школа управления</h3>
+        <p>Государственное и муниципальное управление</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; display: flex; gap: 16px;">
+      <button class="btn btn-secondary" onclick="showScreen(1)">← Назад</button>
+      <button class="btn btn-primary" id="btn-faculty-next" onclick="showScreen(3)" disabled>Продолжить →</button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-3">
+    <div class="breadcrumbs">
+      <a href="#" onclick="showScreen(0); return false;">Главная</a> / 
+      <a href="#" onclick="showScreen(1); return false;">Уровень</a> / 
+      <a href="#" onclick="showScreen(2); return false;">Факультет</a> / 
+      Выбор компании-партнёра
+    </div>
+    <h1>Выберите компанию-партнёра</h1>
+    <p>Экран показывает список компаний-партнёров Финуниверситета, которые участвуют в программе симуляции. Выберите интересующую компанию, чтобы пройти собеседование именно под её требования.</p>
+
+    <div class="selection-grid">
+      <div class="selection-card" onclick="selectCard(this); setChoice('company','Сбер');">
+        <div class="card-icon">🏦</div>
+        <h3>Сбер</h3>
+        <p>Крупнейший банк России. Финансовые, аналитические и IT-вакансии</p>
+        <span class="card-tag">Топ-партнёр</span>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('company','ВТБ');">
+        <div class="card-icon">️</div>
+        <h3>ВТБ</h3>
+        <p>Универсальный банк. Корпоративные финансы, риск-менеджмент</p>
+        <span class="card-tag">Топ-партнёр</span>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('company','Роснефть');">
+        <div class="card-icon"></div>
+        <h3>Роснефть</h3>
+        <p>Крупнейшая нефтяная компания. Финансы, экономика, юриспруденция</p>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('company','Яндекс');">
+        <div class="card-icon">🔍</div>
+        <h3>Яндекс</h3>
+        <p>Технологическая компания. Финтех, аналитика, продуктовый менеджмент</p>
+        <span class="card-tag">IT и финтех</span>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('company','Ростех');">
+        <div class="card-icon">️</div>
+        <h3>Ростех</h3>
+        <p>Государственная корпорация. Финансы, управление, инженерная экономика</p>
+      </div>
+      <div class="selection-card" onclick="selectCard(this); setChoice('company','РЖД');">
+        <div class="card-icon"></div>
+        <h3>РЖД</h3>
+        <p>Крупнейшая транспортная компания. Логистика, финансы, экономика транспорта</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; display: flex; gap: 16px;">
+      <button class="btn btn-secondary" onclick="showScreen(2)">← Назад</button>
+      <button class="btn btn-primary" id="btn-company-next" onclick="showScreen(4)" disabled>Продолжить →</button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-4">
+    <div class="breadcrumbs">
+      <a href="#" onclick="showScreen(0); return false;">Главная</a> / 
+      <a href="#" onclick="showScreen(1); return false;">Уровень</a> / 
+      <a href="#" onclick="showScreen(2); return false;">Факультет</a> / 
+      <a href="#" onclick="showScreen(3); return false;">Компания</a> / 
+      Выбор вакансии
+    </div>
+    <h1>Выберите вакансию</h1>
+    <p>Для выбранной компании открывается список актуальных вакансий. Каждая вакансия сопровождается рекомендацией по обучению. Выберите конкретную позицию, и система сформирует сценарий собеседования.</p>
+
+    <div class="selection-grid" style="grid-template-columns: 1fr;">
+      <div class="vacancy-card" onclick="selectVacancy(this); setChoice('vacancy','Младший финансовый аналитик');">
+        <div class="vacancy-logo">📊</div>
+        <div class="vacancy-info">
+          <h3>Младший финансовый аналитик</h3>
+          <p style="margin:0; font-size:14px; color:var(--color-text-secondary);">Анализ финансовой отчётности, подготовка презентаций для руководства, работа с Excel и BI-системами</p>
+          <div class="vacancy-meta">
+            <span> Москва</span>
+            <span> Полная занятость</span>
+            <span>🎓 От 3 курса</span>
+          </div>
+          <span class="rec-badge">✓ Рекомендована для студентов 3–4 курсов</span>
+        </div>
+      </div>
+
+      <div class="vacancy-card" onclick="selectVacancy(this); setChoice('vacancy','Специалист по кредитному анализу');">
+        <div class="vacancy-logo"></div>
+        <div class="vacancy-info">
+          <h3>Специалист по кредитному анализу</h3>
+          <p style="margin:0; font-size:14px; color:var(--color-text-secondary);">Оценка кредитоспособности заёмщиков, анализ рисков, подготовка кредитных заключений</p>
+          <div class="vacancy-meta">
+            <span>📍 Москва</span>
+            <span>💼 Полная занятость</span>
+            <span>🎓 Выпускник</span>
+          </div>
+          <span class="rec-badge">✓ Подходит для выпускников магистратуры</span>
+        </div>
+      </div>
+
+      <div class="vacancy-card" onclick="selectVacancy(this); setChoice('vacancy','Стажёр в отдел инвестиционного банкинга');">
+        <div class="vacancy-logo"></div>
+        <div class="vacancy-info">
+          <h3>Стажёр в отдел инвестиционного банкинга</h3>
+          <p style="margin:0; font-size:14px; color:var(--color-text-secondary);">Участие в сделках M&A, финансовое моделирование, подготовка питч-буков</p>
+          <div class="vacancy-meta">
+            <span>📍 Москва</span>
+            <span>💼 Стажировка</span>
+            <span>🎓 От 2 курса</span>
+          </div>
+          <span class="rec-badge">✓ Рекомендована для студентов 2–3 курсов</span>
+        </div>
+      </div>
+
+      <div class="vacancy-card" onclick="selectVacancy(this); setChoice('vacancy','Менеджер по работе с корпоративными клиентами');">
+        <div class="vacancy-logo">🤝</div>
+        <div class="vacancy-info">
+          <h3>Менеджер по работе с корпоративными клиентами</h3>
+          <p style="margin:0; font-size:14px; color:var(--color-text-secondary);">Ведение портфеля корпоративных клиентов, кросс-продажи, развитие отношений</p>
+          <div class="vacancy-meta">
+            <span>📍 Москва / регионы</span>
+            <span>💼 Полная занятость</span>
+            <span>🎓 Выпускник</span>
+          </div>
+          <span class="rec-badge">✓ Подходит для выпускников бакалавриата и магистратуры</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; display: flex; gap: 16px;">
+      <button class="btn btn-secondary" onclick="showScreen(3)">← Назад</button>
+      <button class="btn btn-primary" id="btn-vacancy-next" onclick="startInterview()" disabled>Начать собеседование →</button>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-5">
+    <div class="breadcrumbs">
+      <a href="#" onclick="showScreen(0); return false;">Главная</a> / 
+      Прохождение собеседования
+    </div>
+    <h1>Собеседование с рекрутером</h1>
+    <p style="margin-bottom:32px;">На экране появляется виртуальный рекрутер. Начинается диалог, максимально приближенный к реальному собеседованию. Выбирайте наиболее подходящий вариант ответа.</p>
+
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="chat-avatar">👩‍💼</div>
+        <div class="chat-header-info">
+          <h3 id="recruiter-name">Анна Петрова</h3>
+          <p>HR-менеджер · <span id="recruiter-company">Сбер</span> · Онлайн</p>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input" id="chatInput"></div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-6">
+    <div class="results-hero">
+      <h1>Собеседование завершено!</h1>
+      <p>Рекрутер благодарит вас за прохождение. Система автоматически оценила качество ваших ответов и сформировала итоговый отчёт.</p>
+      <div class="score-circle">
+        <div class="score-value" id="totalScore">78</div>
+        <div class="score-label">из 100</div>
+      </div>
+      <p style="font-size:18px; margin:0;">Хороший результат! Есть потенциал для роста.</p>
+    </div>
+
+    <h2 style="margin-top:0;">Разбор по блокам</h2>
+    <div class="results-grid">
+      <div class="result-card">
+        <h3><span class="icon">🎤</span> Самопрезентация</h3>
+        <ul>
+          <li>Структура ответа <div class="score-bar"><div class="score-bar-fill" style="width:85%"></div></div></li>
+          <li>Релевантность опыту <div class="score-bar"><div class="score-bar-fill" style="width:72%"></div></div></li>
+          <li>Уверенность подачи <div class="score-bar"><div class="score-bar-fill" style="width:80%"></div></div></li>
+        </ul>
+      </div>
+      <div class="result-card">
+        <h3><span class="icon">📚</span> Профессиональные знания</h3>
+        <ul>
+          <li>Терминология <div class="score-bar"><div class="score-bar-fill" style="width:90%"></div></div></li>
+          <li>Глубина понимания <div class="score-bar"><div class="score-bar-fill" style="width:68%"></div></div></li>
+          <li>Примеры из практики <div class="score-bar"><div class="score-bar-fill" style="width:60%"></div></div></li>
+        </ul>
+      </div>
+      <div class="result-card">
+        <h3><span class="icon">🧩</span> Ситуационные кейсы</h3>
+        <ul>
+          <li>Логика решения <div class="score-bar"><div class="score-bar-fill" style="width:75%"></div></div></li>
+          <li>Аргументация <div class="score-bar"><div class="score-bar-fill" style="width:70%"></div></div></li>
+          <li>Креативность подхода <div class="score-bar"><div class="score-bar-fill" style="width:82%"></div></div></li>
+        </ul>
+      </div>
+      <div class="result-card">
+        <h3><span class="icon">💼</span> Коммерческие задачи</h3>
+        <ul>
+          <li>Понимание бизнеса <div class="score-bar"><div class="score-bar-fill" style="width:65%"></div></div></li>
+          <li>Ориентация на результат <div class="score-bar"><div class="score-bar-fill" style="width:78%"></div></div></li>
+          <li>Работа с данными <div class="score-bar"><div class="score-bar-fill" style="width:72%"></div></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Рекомендации по развитию</h2>
+    <p>На основе ваших ответов система подобрала персональные рекомендации:</p>
+
+    <div class="recommendation-card">
+      <h4>🎯 Курс «Твоя успешная карьера»</h4>
+      <p>Для улучшения общего понимания рынка труда и навыков трудоустройства. Поможет выстроить стратегию поиска работы и подготовиться к реальным собеседованиям.</p>
+      <span class="rec-tag">Карьера</span>
+      <span class="rec-tag">Рынок труда</span>
+      <button class="btn btn-accent" style="margin-top:12px;">Подробнее о курсе</button>
+    </div>
+
+    <div class="recommendation-card">
+      <h4>🎤 Курс «Самопрезентация»</h4>
+      <p>Для отработки навыков эффективного представления себя и прохождения стресс-интервью. Научит структурировать рассказ о себе и уверенно отвечать на сложные вопросы.</p>
+      <span class="rec-tag">Soft skills</span>
+      <span class="rec-tag">Самопрезентация</span>
+      <button class="btn btn-accent" style="margin-top:12px;">Подробнее о курсе</button>
+    </div>
+
+    <div class="recommendation-card">
+      <h4>🎓 Программы ДПО от центра карьеры</h4>
+      <p>Платные программы дополнительного профессионального образования для углублённой профессиональной подготовки по востребованным направлениям. Сертификат Финуниверситета.</p>
+      <span class="rec-tag">ДПО</span>
+      <span class="rec-tag">Профессиональный рост</span>
+      <button class="btn btn-primary" style="margin-top:12px;">Смотреть программы</button>
+    </div>
+
+    <div style="margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap;">
+      <button class="btn btn-secondary" onclick="showScreen(0)">← На главную</button>
+      <button class="btn btn-primary" onclick="restartInterview()">🔄 Пройти ещё раз</button>
+      <button class="btn btn-accent"> Скачать отчёт (PDF)</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4>Финансовый университет при Правительстве РФ</h4>
+      <p>Ленинградский проспект, дом 49<br>Москва, 125167</p>
+      <p style="margin-top:12px;">© 2026 Финуниверситет. Все права защищены.</p>
+    </div>
+    <div>
+      <h4>Сервис</h4>
+      <p><a href="#">О симуляторе</a></p>
+      <p><a href="#">Компаниям-партнёрам</a></p>
+      <p><a href="#">Преподавателям</a></p>
+      <p><a href="#">FAQ</a></p>
+    </div>
+    <div>
+      <h4>Контакты</h4>
+      <p><a href="#">Центр карьеры</a></p>
+      <p><a href="#">support@fa.ru</a></p>
+      <p><a href="#">8 (495) 249-52-37</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    Мы не следуем привычным трендам, мы создаём новые
+  </div>
+</footer>
+
+<script>
+  const state = {
+    level: null, faculty: null, company: null, vacancy: null,
+    currentStep: 0, chatStep: 0, answers: []
+  };
+  const totalSteps = 6;
+
+  function showScreen(index) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + index).classList.add('active');
+    state.currentStep = index;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const progressBar = document.getElementById('progressBar');
+    if (index === 0 || index === 6) {
+      progressBar.style.display = 'none';
+    } else {
+      progressBar.style.display = 'block';
+      updateProgress(index);
+    }
+  }
+
+  function updateProgress(step) {
+    const steps = document.querySelectorAll('.progress-step');
+    const stepIndex = Math.min(step - 1, steps.length - 1);
+    steps.forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i < stepIndex) s.classList.add('done');
+      else if (i === stepIndex) s.classList.add('active');
+    });
+    document.getElementById('progressLabel').textContent = `Шаг ${stepIndex + 1} из ${totalSteps}`;
+  }
+
+  function selectCard(el, value) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.selection-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    const screen = el.closest('.screen');
+    const nextBtn = screen.querySelector('[id$="-next"]');
+    if (nextBtn) nextBtn.disabled = false;
+  }
+
+  function selectVacancy(el) {
+    document.querySelectorAll('.vacancy-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('btn-vacancy-next').disabled = false;
+  }
+
+  function setChoice(key, value) {
+    state[key] = value;
+    if (key === 'company') {
+      document.getElementById('recruiter-company').textContent = value;
+    }
+  }
+
+  const interviewScript = [
+    {
+      block: 'Самопрезентация',
+      bot: 'Здравствуйте! Рада знакомству. Расскажите, пожалуйста, немного о себе: кто вы, где учитесь и почему вас заинтересовала эта позиция?',
+      type: 'options',
+      options: [
+        'Я студент 4 курса Финансового университета. Меня привлекает ваша компания из-за сильной аналитической культуры. Я владею Excel, SQL и проходил летнюю стажировку в финансовом отделе.',
+        'Я учусь на последнем курсе. Хочу работать у вас, потому что это крупная и стабильная компания. Опыта пока нет, но я готов быстро учиться и выполнять любые задачи.',
+        'Мне просто нужна работа после получения диплома. Слышал, что у вас конкурентная зарплата и хороший соцпакет, поэтому решил попробовать свои силы.',
+        'В свободное время я увлекаюсь спортом и музыкой. Надеюсь, что работа в вашей компании позволит мне совмещать карьеру с хобби и не перерабатывать.'
+      ]
+    },
+    {
+      block: 'Самопрезентация',
+      bot: 'Отлично! А теперь конкретнее: назовите три ваших сильных качества, которые помогут в этой работе.',
+      type: 'options',
+      options: [
+        'Аналитический склад ума, внимательность к деталям, умение работать с большими объёмами данных',
+        'Коммуникабельность, работа в команде, быстрая обучаемость',
+        'Лидерские качества, стратегическое мышление, нацеленность на результат',
+        'Креативность, гибкость, умение находить нестандартные решения'
+      ]
+    },
+    {
+      block: 'Профессиональные знания',
+      bot: 'Перейдём к профессиональным вопросам. Как вы понимаете разницу между EBITDA и чистой прибылью? В каких ситуациях каждая из этих метрик более показательна?',
+      type: 'options',
+      options: [
+        'EBITDA — прибыль до вычета процентов, налогов и амортизации; показывает операционную эффективность. Чистая прибыль — итоговый финансовый результат. EBITDA важна для сравнения компаний, чистая прибыль — для оценки реальной доходности.',
+        'EBITDA всегда больше чистой прибыли, поэтому её используют для завышения показателей. Чистая прибыль — единственно верный показатель.',
+        'Это одно и то же, просто разные названия одного показателя.',
+        'Затрудняюсь ответить, но готов разобраться.'
+      ]
+    },
+    {
+      block: 'Профессиональные знания',
+      bot: 'Хорошо. Представьте, что вы анализируете компанию и видите резкий рост дебиторской задолженности при стабильной выручке. О чём это может говорить?',
+      type: 'options',
+      options: [
+        'Компания смягчила условия оплаты для клиентов, возможно, для стимулирования продаж. Это сигнал о возможных проблемах с ликвидностью.',
+        'Это всегда положительный знак — компания активно продаёт в долг.',
+        'Ничего особенного, это нормальная ситуация для любого бизнеса.',
+        'Компания скрывает выручку через дебиторскую задолженность.'
+      ]
+    },
+    {
+      block: 'Ситуационный кейс',
+      bot: 'Ситуационная задача: ваш руководитель просит подготовить финансовый отчёт к утру, но вы обнаружили расхождение в данных, которое требует дополнительного времени на проверку. Ваши действия?',
+      type: 'options',
+      options: [
+        'Сообщу руководителю о проблеме сразу, предложу вариант: сдать отчёт с пометкой о предварительных данных или задержать сдачу для проверки.',
+        'Сдам отчёт как есть, чтобы уложиться в срок. Расхождение небольшое.',
+        'Потрачу всю ночь на проверку и сдам идеальный отчёт, даже если опоздаю.',
+        'Попрошу коллегу помочь проверить данные параллельно.'
+      ]
+    },
+    {
+      block: 'Коммерческая задача',
+      bot: 'Последний блок — коммерческая задача. Клиент просит предложить ему продукт с максимальной доходностью, но у него низкая толерантность к риску. Как вы построите диалог?',
+      type: 'options',
+      options: [
+        'Объясню клиенту связь риска и доходности, предложу сбалансированный портфель с защитой капитала и умеренной доходностью.',
+        'Предложу самый доходный продукт — клиент сам несёт ответственность за риск.',
+        'Откажу клиенту, так как его запрос противоречит его профилю.',
+        'Предложу несколько вариантов разной доходности, чтобы клиент сам выбрал.'
+      ]
+    },
+    {
+      block: 'Завершение',
+      bot: 'Спасибо за ваши ответы! Это было интересное собеседование. Мы свяжемся с вами в течение 5 рабочих дней. Удачи!',
+      type: 'end',
+      options: null
+    }
+  ];
+
+  function startInterview() {
+    state.chatStep = 0;
+    state.answers = [];
+    document.getElementById('chatMessages').innerHTML = '';
+    showScreen(5);
+    renderChatStep();
+  }
+
+  function renderChatStep() {
+    const step = interviewScript[state.chatStep];
+    const messagesEl = document.getElementById('chatMessages');
+    const inputEl = document.getElementById('chatInput');
+
+    if (state.chatStep === 0 || interviewScript[state.chatStep - 1].block !== step.block) {
+      const label = document.createElement('div');
+      label.className = 'message system';
+      label.innerHTML = `<span class="chat-block-label">${step.block}</span>`;
+      messagesEl.appendChild(label);
+    }
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'message bot';
+    botMsg.textContent = step.bot;
+    messagesEl.appendChild(botMsg);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    setTimeout(() => {
+      if (step.type === 'options') {
+        inputEl.innerHTML = `<div class="chat-options">
+          ${step.options.map((opt, i) => `
+            <button class="chat-option-btn" onclick="selectAnswer(${i})">${opt}</button>
+          `).join('')}
+        </div>`;
+      } else if (step.type === 'end') {
+        inputEl.innerHTML = `
+          <button class="btn btn-primary" style="width:100%;" onclick="showResults()">Посмотреть результаты →</button>
+        `;
+      }
+    }, 600);
+  }
+
+  function selectAnswer(index) {
+    const step = interviewScript[state.chatStep];
+    const messagesEl = document.getElementById('chatMessages');
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message user';
+    userMsg.textContent = step.options[index];
+    messagesEl.appendChild(userMsg);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    state.answers.push({ step: state.chatStep, answer: index, type: 'options' });
+    state.chatStep++;
+    document.getElementById('chatInput').innerHTML = '';
+    setTimeout(renderChatStep, 500);
+  }
+
+  function showResults() {
+    let score = 50; // Базовый балл
+    state.answers.forEach(a => {
+      if (a.type === 'options') {
+        if (a.answer === 0) score += 8;      // Лучший ответ
+        else if (a.answer === 1) score += 4; // Средний
+        else if (a.answer === 2) score += 2; // Слабый
+        else score += 1;                     // Неверный
+      }
+    });
+    score = Math.min(score, 98);
+    document.getElementById('totalScore').textContent = score;
+    showScreen(6);
+  }
+
+  function restartInterview() {
+    state.level = null; state.faculty = null;
+    state.company = null; state.vacancy = null;
+    document.querySelectorAll('.selection-card, .vacancy-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('[id$="-next"]').forEach(b => b.disabled = true);
+    showScreen(1);
+  }
+</script>
+
+</body>
+</html>
