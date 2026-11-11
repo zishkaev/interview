@@ -87,29 +87,29 @@ namespace Interview
             Notify();
         }
 
-        /// <summary>«ВУЗ › Финансовый факультет › ВТБ» — для хлебных крошек.</summary>
+        /// <summary>«Высшее образование › Финансовый факультет › Банк ВТБ (ПАО)» (названия дословно из сценария) — для хлебных крошек.</summary>
         public static string Breadcrumb(int depth)
         {
             var parts = new System.Collections.Generic.List<string>();
 
             if (depth >= 1 && Level != null)
             {
-                parts.Add(string.IsNullOrEmpty(Level.shortTitle) ? Level.title : Level.shortTitle);
+                parts.Add(Level.title);
             }
 
             if (depth >= 2 && Faculty != null)
             {
-                parts.Add(string.IsNullOrEmpty(Faculty.shortTitle) ? Faculty.title : Faculty.shortTitle);
+                parts.Add(Faculty.title);
             }
 
             if (depth >= 3 && Company != null)
             {
-                parts.Add(string.IsNullOrEmpty(Company.shortTitle) ? Company.title : Company.shortTitle);
+                parts.Add(Company.title);
             }
 
             if (depth >= 4 && Vacancy != null)
             {
-                parts.Add(Vacancy.position);
+                parts.Add(Vacancy.DisplayPosition);
             }
 
             return string.Join(" › ", parts);

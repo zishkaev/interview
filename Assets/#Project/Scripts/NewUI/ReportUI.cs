@@ -65,8 +65,8 @@ public class ReportUI : MonoBehaviour
         // ---- шапка ----
         if (subtitleText)
         {
-            string companyName = company != null ? company.shortTitle : string.Empty;
-            subtitleText.text = (string.IsNullOrEmpty(companyName) ? string.Empty : companyName + " · ") + vacancy.position +
+            string companyName = company != null ? company.title : string.Empty;
+            subtitleText.text = (string.IsNullOrEmpty(companyName) ? string.Empty : companyName + " · ") + vacancy.DisplayPosition +
                                 "\nРекрутер благодарит вас за прохождение. Система оценила качество ответов и сформировала итоговый отчёт.";
         }
 
@@ -86,8 +86,8 @@ public class ReportUI : MonoBehaviour
 
         if (verdictText)
         {
-            verdictText.text = InterviewText.Verdict(percent) + "  Баллы: " + session.Points + " из " + session.MaxPoints +
-                               " (сильный ответ — 2, средний — 1, слабый — 0).";
+            verdictText.text = InterviewText.Verdict(percent) + "\nОбщий балл — сумма баллов за этапы: " + PointsSum() +
+                               " = " + session.Points + " из " + session.MaxPoints + " (сильный ответ — 2, средний — 1, слабый — 0).";
         }
 
         // ---- этапы ----
@@ -171,25 +171,24 @@ public class ReportUI : MonoBehaviour
             "Для улучшения общего понимания рынка труда и навыков трудоустройства. Поможет выстроить стратегию поиска работы и подготовиться к реальным собеседованиям.",
             "Карьера · Рынок труда");
 
-        if (selfPresentation != Quality.strong || stress != Quality.strong)
+        // Все три рекомендации из сценария (ТЗ, шаг 8) показываются всегда;
+        // по фактическим ответам добавляется пояснение, на что обратить внимание.
+        var reasons = new List<string>();
+
+        if (selfPresentation != Quality.strong)
         {
-            var reasons = new List<string>();
-
-            if (selfPresentation != Quality.strong)
-            {
-                reasons.Add("самопрезентация");
-            }
-
-            if (stress != Quality.strong)
-            {
-                reasons.Add("стресс-кейс");
-            }
-
-            AddRecommendation("Курс «Самопрезентация»",
-                "Для отработки навыков эффективного представления себя и прохождения стресс-интервью. " +
-                "Рекомендуем, так как есть зоны роста: " + string.Join(", ", reasons) + ".",
-                "Soft skills · Самопрезентация");
+            reasons.Add("самопрезентация");
         }
+
+        if (stress != Quality.strong)
+        {
+            reasons.Add("стресс-кейс");
+        }
+
+        AddRecommendation("Курс «Самопрезентация»",
+            "Для отработки навыков эффективного представления себя и прохождения стресс-интервью." +
+            (reasons.Count > 0 ? " Особенно рекомендуем: есть зоны роста — " + string.Join(", ", reasons) + "." : string.Empty),
+            "Soft skills · Самопрезентация");
 
         string dpo = "Платные программы дополнительного профессионального образования от Центра карьеры для углублённой профессиональной подготовки по востребованным направлениям.";
 
@@ -204,6 +203,20 @@ public class ReportUI : MonoBehaviour
         }
 
         AddRecommendation("Программы ДПО от Центра карьеры", dpo, "ДПО · Профессиональный рост");
+    }
+
+    /// <summary>«2 + 1 + 0 + 2» — баллы этапов по порядку.</summary>
+    private string PointsSum()
+    {
+        var parts = new List<string>();
+
+        for (int i = 0; i < session.QuestionCount; i++)
+        {
+            AnswerResult result = session.GetResult(i);
+            parts.Add((result.isValid ? QualityUtil.Points(result.quality) : 0).ToString());
+        }
+
+        return string.Join(" + ", parts);
     }
 
     private Quality QualityAt(int index)

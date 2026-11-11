@@ -25,7 +25,9 @@ public class StageCardView : MonoBehaviour
 
         if (qualityText)
         {
-            qualityText.text = result.isValid ? InterviewText.QualityLabel(quality) : "Нет ответа";
+            int points = result.isValid ? QualityUtil.Points(quality) : 0;
+            qualityText.text = (result.isValid ? InterviewText.QualityLabel(quality) : "Нет ответа") +
+                               " · " + points + " из " + QualityUtil.MaxPoints + " б.";
             qualityText.color = color;
         }
 

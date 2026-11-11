@@ -44,12 +44,12 @@ public static class InterviewDocxImporter
     private static readonly Mapping[] Mappings =
     {
         new Mapping("Альфа-Банк Диалог_Стажер-аналитик", "alfa_analyst_intern", "alfa", "Выпускной курс", "fin", "fitbda"),
-        new Mapping("Альфа-Банк Диалог_Стажер_структурное", "alfa_structured_finance_intern", "alfa", "Выпускники", "fin"),
+        new Mapping("Альфа-Банк Диалог_Стажер_структурное", "alfa_structured_finance_intern", "alfa", "Выпускники"),
         new Mapping("Аналитический центр", "acrf_analyst_intern", "acrf", "Последний курс и выпускники", "feb", "vshu"),
         new Mapping("Банк России", "cbr_financial_markets_intern", "cbr", "Студенты вузов", "fin"),
-        new Mapping("Банк Синара", "sinara_management_reporting_analyst", "sinara", "Опыт от 1–2 лет", "ftaba", "fin"),
+        new Mapping("Банк Синара", "sinara_management_reporting_analyst", "sinara", "Опыт от 1–2 лет", "ftaba"),
         new Mapping("ВК Диалог", "vk_product_analyst", "vk", "Опыт в продуктовой аналитике", "fin", "fitbda"),
-        new Mapping("ВТБ Диалог_Стажер_риск", "vtb_risk_management_intern", "vtb", "Выпускники 2025–2027", "fin"),
+        new Mapping("ВТБ Диалог_Стажер_риск", "vtb_risk_management_intern", "vtb", "Выпускники 2025–2027"),
         new Mapping("ВТБ Диалог_Стажер_финансовый", "vtb_financial_analyst_intern", "vtb", "Выпускники 2025–2027", "fin"),
         new Mapping("КЭПТ", "kept_corporate_tax_intern", "kept", "Последние курсы и выпускники", "ftaba"),
         new Mapping("Московская биржа", "moex_invest_education_intern", "moex", "Студенты и выпускники", "fin"),
@@ -58,11 +58,26 @@ public static class InterviewDocxImporter
         new Mapping("Росатом", "rosatom_data_analyst", "rosatom", "Последний курс, опыт до 0,5 года", "fitbda"),
         new Mapping("Ростелеком Диалог_Стажер_департамент_стратегии", "rostelecom_strategy_intern", "rostelecom", "Студенты вузов", "feb"),
         new Mapping("Ростелеком Диалог_Стажер_блок_аналитики", "rostelecom_analytics_intern", "rostelecom", "Студенты и выпускники", "fin"),
-        new Mapping("Сбер", "sber_subsidiaries_finance_intern", "sber", "Магистратура", "fin"),
+        new Mapping("Сбер", "sber_subsidiaries_finance_intern", "sber", "Магистратура"),
         new Mapping("Туризм.РФ", "tourism_project_coordinator", "tourism", "Специалисты с высшим образованием", "fin", "vshu"),
         new Mapping("ФБК Диалог_Стажер_аудит", "fbk_hightech_audit_intern", "fbk", "Студенты и выпускники", "ftaba"),
         new Mapping("ФБК Диалог_Стажер_оценка", "fbk_valuation_intern", "fbk", "Старшие курсы и выпускники", "fin"),
         new Mapping("Федеральное казначейство", "treasury_gov_finance_specialist", "treasury", "Выпускники вузов и колледжей", "fin", "mfc"),
+    };
+
+    // Названия вакансий дословно из «Шаг_5_общего_сценарий_пользователя.docx» (id вакансии → название).
+    private static readonly Dictionary<string, string> Step5Titles = new Dictionary<string, string>
+    {
+        { "rostelecom_analytics_intern", "Стажер в блок аналитики" },
+        { "vtb_financial_analyst_intern", "Стажер финансовый аналитик" },
+        { "vk_product_analyst", "Продуктовый аналитик в Mail" },
+        { "psb_senior_analyst", "Старший аналитик" },
+        { "moex_invest_education_intern", "Стажер в департамент развития инвестиционных инструментов и образовательных программ" },
+        { "cbr_financial_markets_intern", "Стажер направления финансовых рынков" },
+        { "alfa_analyst_intern", "Стажер-аналитик" },
+        { "treasury_gov_finance_specialist", "Специалист 1 разряда по подготовке информации по государственным финансам" },
+        { "fbk_valuation_intern", "Стажер в Департамент оценки и консультационных услуг по сделкам" },
+        { "tourism_project_coordinator", "Координатор проектов" },
     };
 
     private static readonly Regex StageRegex = new Regex(@"^Этап\s+(\d+)\s*\.\s*(.+)$");
@@ -196,6 +211,11 @@ public static class InterviewDocxImporter
             faculties = mapping.faculties,
             courseRecommendation = mapping.course
         };
+
+        if (Step5Titles.TryGetValue(mapping.id, out string listTitle))
+        {
+            data.listTitle = listTitle;
+        }
 
         var questions = new List<QuestionData>();
         var answers = new List<AnswerData>();
@@ -376,6 +396,11 @@ public static class InterviewDocxImporter
         if (!string.IsNullOrEmpty(existing.courseRecommendation))
         {
             data.courseRecommendation = existing.courseRecommendation;
+        }
+
+        if (!string.IsNullOrEmpty(existing.listTitle))
+        {
+            data.listTitle = existing.listTitle;
         }
 
         CompanyHint(data);

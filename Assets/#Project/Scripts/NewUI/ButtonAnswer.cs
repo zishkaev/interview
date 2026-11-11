@@ -13,7 +13,8 @@ public class ButtonAnswer : MonoBehaviour
     public Action<int> OnClick;
     public int id;
 
-    void Start()
+    // Awake, а не Start: подписка нужна сразу при первом включении кнопки.
+    void Awake()
     {
         button.onClick.AddListener(Press);
     }
@@ -32,9 +33,9 @@ public class ButtonAnswer : MonoBehaviour
         }
     }
 
-    public void SetData(AnswerData answerData)
+    public void SetData(AnswerData answerData, string letter = null)
     {
-        SetText(answerData.text);
+        SetText(string.IsNullOrEmpty(letter) ? answerData.text : "<b>" + letter + ".</b> " + answerData.text);
     }
 
     private void Press()

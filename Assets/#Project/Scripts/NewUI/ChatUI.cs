@@ -11,7 +11,9 @@ public class ChatUI : MonoBehaviour
     public InterviewSession interviewSession;
     public InterviewData curData;
     [Header("Header")]
-    [Tooltip("Строка «HR-менеджер • Сбер • Онлайн» в шапке чата.")]
+    [Tooltip("Имя в шапке чата — «Рекрутер».")]
+    public TextMeshProUGUI recruiterNameText;
+    [Tooltip("Строка под именем: «Банк ВТБ (ПАО) • Представитель кадровой службы».")]
     public TextMeshProUGUI recruiterInfoText;
     [Header("Dialog")]
     public RectTransform textRoot;
@@ -71,16 +73,29 @@ public class ChatUI : MonoBehaviour
 
     private void UpdateHeader()
     {
+        if (recruiterNameText)
+        {
+            recruiterNameText.text = "Рекрутер";
+        }
+
         if (recruiterInfoText == null || curData == null)
         {
             return;
         }
 
         CompanyData company = InterviewCatalog.GetCompany(curData.companyId);
-        string role = string.IsNullOrEmpty(curData.recruiterRole) ? "HR-менеджер" : curData.recruiterRole;
-        string companyName = company != null ? company.shortTitle : string.Empty;
-        recruiterInfoText.text = role + (string.IsNullOrEmpty(companyName) ? string.Empty : " • " + companyName) + " • Онлайн";
+        string companyName = company != null ? company.title : string.Empty;
+        string role = curData.recruiterRole ?? string.Empty;
+        recruiterInfoText.text = companyName + (companyName.Length > 0 && role.Length > 0 ? " • " : string.Empty) + role;
     }
+
+    /// <summary>Буква варианта по позиции кнопки (варианты перемешаны, поэтому «A» — не обязательно сильный ответ).</summary>
+    private static string Letter(int index)
+    {
+        return index >= 0 && index < AnswerLetters.Length ? AnswerLetters[index] : (index + 1).ToString();
+    }
+
+    private static readonly string[] AnswerLetters = { "A", "B", "C", "D", "E" };
 
     private void ShowSelector()
     {
@@ -92,8 +107,8 @@ public class ChatUI : MonoBehaviour
     {
         // Заголовок этапа над репликой рекрутера: «Этап 2 из 4 · Профессиональные компетенции».
         int index = interviewSession.CurrentIndex;
-        string stage = "<size=85%><color=" + stageColor + "><b>Этап " + (index + 1) + " из " + interviewSession.QuestionCount
-                       + " · " + InterviewText.StageName(data) + "</b></color></size>\n";
+        string stage = "<color=" + stageColor + "><b>Этап " + (index + 1) + " из " + interviewSession.QuestionCount
+                       + " · " + InterviewText.StageName(data) + "</b></color>\n";
         AddDialog(false, stage + data.text);
 
         buttonAnswerRoot.SetActive(true);
@@ -107,7 +122,7 @@ public class ChatUI : MonoBehaviour
             buttonAnswers[i].gameObject.SetActive(visible);
             if (visible)
             {
-                buttonAnswers[i].SetData(data.answers[i]);
+                buttonAnswers[i].SetData(data.answers[i], Letter(i));
             }
         }
     }
@@ -121,7 +136,7 @@ public class ChatUI : MonoBehaviour
             return; // повторный клик по уже отвеченному вопросу
         }
 
-        AddDialog(true, result.answerText);
+        AddDialog(true, "<b>" + Letter(id) + ".</b> " + result.answerText);
 
         buttonAnswerRoot.SetActive(false);
         resultRoot.SetActive(true);

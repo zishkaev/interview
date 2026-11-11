@@ -28,8 +28,21 @@ public class SelectionStepUI : MonoBehaviour
     public RectTransform content;
 
     [Header("Факультеты")]
-    [Tooltip("Показывать только факультеты, для которых есть хотя бы одна вакансия.")]
-    public bool hideEmptyFaculties = true;
+    [Tooltip("Показывать только факультеты, для которых есть хотя бы одна вакансия. " +
+             "По сценарию (Шаг_4) перечень должен быть полным — по умолчанию выключено.")]
+    public bool hideEmptyFaculties;
+
+    [Header("Заголовок шага (на шаге колледжа/факультета зависит от уровня)")]
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI subtitleText;
+    public string collegeTitle = "Выберите колледж";
+    [TextArea] public string collegeSubtitle = "Выберите свой колледж, чтобы система могла предложить релевантные вакансии и профессиональные вопросы.";
+    public string facultyTitle = "Выберите факультет";
+    [TextArea] public string facultySubtitle = "Выберите свой факультет, чтобы система могла предложить релевантные вакансии и профессиональные вопросы.";
+
+    [Header("Пустой список")]
+    [Tooltip("Текст внутри emptyState (необязательно).")]
+    public TextMeshProUGUI emptyText;
 
     [Header("Необязательно")]
     [Tooltip("Показывается, если подходящих вариантов нет.")]
@@ -121,9 +134,53 @@ public class SelectionStepUI : MonoBehaviour
             emptyState.SetActive(options.Count == 0);
         }
 
+        if (emptyText)
+        {
+            emptyText.text = EmptyMessage();
+        }
+
+        UpdateHeader();
+
         if (breadcrumbText)
         {
             breadcrumbText.text = InterviewSelection.Breadcrumb((int)kind);
+        }
+    }
+
+    private static bool IsCollege
+    {
+        get { return InterviewSelection.Level != null && InterviewSelection.Level.id == "college"; }
+    }
+
+    /// <summary>Шаг 4 сценария: «Выберите колледж» для СПО, «Выберите факультет» для ВО.</summary>
+    private void UpdateHeader()
+    {
+        if (kind != Kind.Faculty)
+        {
+            return;
+        }
+
+        if (titleText)
+        {
+            titleText.text = IsCollege ? collegeTitle : facultyTitle;
+        }
+
+        if (subtitleText)
+        {
+            subtitleText.text = IsCollege ? collegeSubtitle : facultySubtitle;
+        }
+    }
+
+    private string EmptyMessage()
+    {
+        switch (kind)
+        {
+            case Kind.Company:
+            case Kind.Vacancy:
+                return "Вакансии для выбранного " + (IsCollege ? "колледжа" : "факультета") +
+                       " скоро появятся.\nВернитесь назад и выберите другой " + (IsCollege ? "колледж" : "факультет") + ".";
+            default:
+                return "Список пока пуст.";
         }
     }
 
@@ -164,21 +221,22 @@ public class SelectionStepUI : MonoBehaviour
     {
         switch (option)
         {
+            // Названия — дословно из «Шаг_3», «Шаг_4», «Шаг_5»; описания, которых нет в сценарии, не выводим.
             case LevelData level:
-                card.Set(level.shortTitle, level.description, null, level.badge);
+                card.Set(level.title, level.description, null, level.badge);
                 break;
             case FacultyData faculty:
                 card.Set(faculty.title, faculty.description);
                 break;
             case CompanyData company:
-                card.Set(company.shortTitle, company.description, company.title, company.tag);
+                card.Set(company.title, company.description, null, company.tag);
                 break;
             case InterviewData vacancy:
                 CompanyData owner = InterviewCatalog.GetCompany(vacancy.companyId);
-                string meta = (owner != null ? owner.shortTitle + " · " : string.Empty) + vacancy.QuestionsCount + " этапа собеседования";
+                string meta = (owner != null ? owner.title + " · " : string.Empty) + vacancy.QuestionsCount + " этапа собеседования";
                 // Без «✓»: в шрифте LiberationSans SDF нет этого символа.
                 string tag = string.IsNullOrEmpty(vacancy.courseRecommendation) ? null : vacancy.courseRecommendation;
-                card.Set(vacancy.position, vacancy.targetAudience, meta, tag);
+                card.Set(vacancy.DisplayPosition, vacancy.targetAudience, meta, tag);
                 break;
         }
     }

@@ -188,6 +188,12 @@ namespace Interview
         /// <summary>Название позиции.</summary>
         public string position;
 
+        /// <summary>
+        /// Название вакансии дословно из «Шаг_5» общего сценария (например, «Продуктовый аналитик в Mail»).
+        /// Если задано — показывается пользователю вместо <see cref="position"/>.
+        /// </summary>
+        public string listTitle;
+
         /// <summary>Заголовок «Компания — Позиция» (для логов и старого UI).</summary>
         public string title;
 
@@ -214,6 +220,12 @@ namespace Interview
 
         public InterviewData()
         {
+        }
+
+        /// <summary>Название вакансии для экрана: из «Шаг_5», иначе из docx.</summary>
+        public string DisplayPosition
+        {
+            get { return string.IsNullOrEmpty(listTitle) ? position : listTitle; }
         }
 
         public int QuestionsCount
