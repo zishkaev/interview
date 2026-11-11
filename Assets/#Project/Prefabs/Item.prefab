@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 6049454073765269441}
   - component: {fileID: 6800507849558780280}
   - component: {fileID: 385131030463674956}
-  - component: {fileID: 8010262447385445110}
+  - component: {fileID: 5879197489226462932}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -666,7 +666,8 @@ MonoBehaviour:
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   selectColor: {r: 0.9607844, g: 0.9686275, b: 0.98823535, a: 1}
   icon: {fileID: 1316256973397630454}
---- !u!114 &8010262447385445110
+  IsSelected: 0
+--- !u!114 &5879197489226462932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -675,12 +676,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5265473075801078259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa54df136dbaa04b94ea9f50b77d0ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 221b0b0b9773901489bc832d8130f167, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CompanyUI
-  logoText: {fileID: 5196529556253540070}
-  descText: {fileID: 7494449607576774014}
-  profText: {fileID: 703739842009691553}
+  m_EditorClassIdentifier: Assembly-CSharp::CardView
+  titleText: {fileID: 703739842009691553}
+  descriptionText: {fileID: 7494449607576774014}
+  metaText: {fileID: 5196529556253540070}
+  tagText: {fileID: 1793159666720699396}
+  tagRoot: {fileID: 7824936176892723117}
 --- !u!1 &7369341221893780906
 GameObject:
   m_ObjectHideFlags: 0

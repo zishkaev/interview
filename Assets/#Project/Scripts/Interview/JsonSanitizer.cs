@@ -13,7 +13,7 @@ namespace Interview
     /// Всё внутри строковых литералов остаётся нетронутым, поэтому текст с «//» или «, }» не портится.
     /// Класс не зависит от UnityEngine, поэтому его легко покрыть обычным юнит-тестом.
     /// </summary>
-    internal static class JsonSanitizer
+    public static class JsonSanitizer
     {
         /// <summary>Возвращает JSON, пригодный для <c>JsonUtility.FromJson</c>.</summary>
         public static string Sanitize(string json)

@@ -88,6 +88,7 @@ namespace Interview
 
         private QuestionData[] runtimeQuestions;
         private bool[] answered;
+        private AnswerResult[] results;
         private Quality[] correctAnswers;
         private System.Random random;
 
@@ -157,6 +158,60 @@ namespace Interview
             }
         }
 
+        /// <summary>Сумма баллов за отвеченные этапы (strong = 2, medium = 1, weak = 0).</summary>
+        public int Points
+        {
+            get
+            {
+                if (answered == null)
+                {
+                    return 0;
+                }
+
+                int points = 0;
+
+                for (int i = 0; i < answered.Length; i++)
+                {
+                    if (answered[i])
+                    {
+                        points += QualityUtil.Points(correctAnswers[i]);
+                    }
+                }
+
+                return points;
+            }
+        }
+
+        /// <summary>Максимально возможная сумма баллов.</summary>
+        public int MaxPoints
+        {
+            get { return QuestionCount * QualityUtil.MaxPoints; }
+        }
+
+        /// <summary>Итог в процентах 0..100.</summary>
+        public int Percent
+        {
+            get { return MaxPoints == 0 ? 0 : Mathf.RoundToInt(100f * Points / MaxPoints); }
+        }
+
+        /// <summary>Вопрос сессии по индексу (с учётом перемешивания).</summary>
+        public QuestionData GetQuestion(int index)
+        {
+            return runtimeQuestions != null && index >= 0 && index < runtimeQuestions.Length ? runtimeQuestions[index] : null;
+        }
+
+        /// <summary>Выбранный ответ на этап (isValid == false, если не отвечали).</summary>
+        public AnswerResult GetResult(int index)
+        {
+            return results != null && index >= 0 && index < results.Length ? results[index] : default;
+        }
+
+        /// <summary>Качество ответа на этап с индексом (если отвечали).</summary>
+        public Quality GetAnswerQuality(int index)
+        {
+            return correctAnswers != null && index >= 0 && index < correctAnswers.Length ? correctAnswers[index] : Quality.weak;
+        }
+
         private void Start()
         {
             if (loadOnStart)
@@ -208,6 +263,7 @@ namespace Interview
             }
 
             answered = new bool[runtimeQuestions.Length];
+            results = new AnswerResult[runtimeQuestions.Length];
             correctAnswers = new Quality[runtimeQuestions.Length];
             CurrentIndex = -1;
             LastResult = default;
@@ -302,7 +358,7 @@ namespace Interview
 
             AnswerData answer = question.answers[answerIndex];
             result.answerText = answer.text;
-            result.quality = answer.quality;
+            result.quality = answer.Level;
             result.comment = answer.comment;
 
             if (answered[CurrentIndex] && !allowAnswerChange)
@@ -312,9 +368,10 @@ namespace Interview
             }
 
             answered[CurrentIndex] = true;
-            correctAnswers[CurrentIndex] = answer.quality;
+            correctAnswers[CurrentIndex] = answer.Level;
 
             result.isValid = true;
+            results[CurrentIndex] = result;
             LastResult = result;
 
             if (Answered != null)
@@ -370,7 +427,7 @@ namespace Interview
             }
 
             AnswerData answer = question.answers[answerIndex];
-            return answer != null && answer.quality == Quality.strong;
+            return answer != null && answer.Level == Quality.strong;
         }
 
         /// <summary>Отвечал ли игрок на вопрос с указанным индексом.</summary>
@@ -439,7 +496,7 @@ namespace Interview
 
             var answers = (AnswerData[])question.answers.Clone();
             Shuffle(answers);
-            return new QuestionData(question.id, question.category, question.text, answers);
+            return new QuestionData(question.id, question.category, question.goal, question.text, answers);
         }
     }
 }

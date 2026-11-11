@@ -8,7 +8,7 @@ namespace Interview
     /// <summary>
     /// Загрузка банка вопросов из JSON-ассетов.
     /// Структура JSON совпадает с классами из <see cref="InterviewData"/>:
-    /// title, description, questions[] → answers[] (text, isCorrect, comment).
+    /// id, companyId, position, faculties[], questions[] → answers[] (text, quality, comment).
     ///
     /// Точки входа: <see cref="FromTextAsset"/>, <see cref="FromResources"/>, <see cref="FromFile"/>,
     /// <see cref="FromJson"/>. Все они разбирают JSON, нормализуют данные и валидируют их.
@@ -188,7 +188,13 @@ namespace Interview
                         continue;
                     }
 
-                    if (answer.quality == Quality.strong)
+                    if (!QualityUtil.TryParse(answer.quality, out Quality level))
+                    {
+                        Log(logIssues, prefix + where + ": вариант #" + (a + 1) + " — неизвестное значение quality «" + answer.quality + "» (ожидается strong / medium / weak).");
+                        isValid = false;
+                    }
+
+                    if (level == Quality.strong)
                     {
                         correctCount++;
                     }
@@ -201,12 +207,12 @@ namespace Interview
 
                 if (correctCount == 0)
                 {
-                    Log(logIssues, prefix + where + " («" + Shorten(question.text) + "»): нет ни одного правильного варианта.");
+                    Log(logIssues, prefix + where + " («" + Shorten(question.text) + "»): нет ни одного сильного варианта.");
                     isValid = false;
                 }
                 else if (correctCount > 1)
                 {
-                    Log(logIssues, prefix + where + ": правильных вариантов больше одного (" + correctCount + ") — ок для мультивыбора.");
+                    Log(logIssues, prefix + where + ": сильных вариантов больше одного (" + correctCount + ").");
                 }
 
                 if (answersWithoutComment > 0)

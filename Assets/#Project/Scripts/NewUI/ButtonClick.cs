@@ -18,7 +18,11 @@ public class ButtonClick : MonoBehaviour
 
     private void Click()
     {
-        menuUI.Select(this);
+        // Кнопка не зарегистрирована в MenuUI (не prev/next какой-либо страницы) — ничего не делаем.
+        if (menuUI != null)
+        {
+            menuUI.Select(this);
+        }
     }
 
     void OnValidate()
