@@ -95,6 +95,18 @@ Assets/#Project/Data/LegacyInterview/           старые JSON (не загр
   пройден не на сильный ответ; «Программы ДПО» — всегда, с направлениями из поля `recommendations` вакансии.
 * Кнопки: «На главную», «Пройти ещё раз» (та же вакансия), «Выбрать другую вакансию».
 
+## Структура проекта
+
+```
+Assets/#Project/Scripts/Interview/   данные и логика (без UI)
+Assets/#Project/Scripts/NewUI/       UI на UGUI: меню, шаги выбора, чат, отчёт, BlockText, ButtonAnswer
+Assets/#Project/Editor/              импортёр DOCX
+Assets/#Project/Prefabs/             Item (карточка вакансии), TextBlock (сообщение чата)
+Assets/#Project/Example/             скриншоты HTML-прототипа — эталон визуала
+```
+
+Старый визуал (Scripts/UI, сцена InterviewUI, RectButton, InterviewSceneBuilder) удалён — он есть в истории git.
+
 ## Сцена (SampleScene)
 
 `Canvas (MenuUI)` → страницы: Start, Step 1 (уровень), Step 2 (факультет), Step 3 (компания),
